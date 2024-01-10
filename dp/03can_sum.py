@@ -18,3 +18,13 @@ def can_sum_with_memoization(target_sum, numbers, memo={}):
             return True
     memo[target_sum] = False
     return False
+
+def can_sum_with_tabulation(target_sum, numbers):
+    result = [False] * (target_sum + 1)
+    result[0] = True
+
+    for i in range(target_sum+1):
+        for  num in numbers:
+            if i + num <= target_sum and result[i]:
+                result[i+num] = result[i]
+    return result[target_sum]

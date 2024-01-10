@@ -25,5 +25,13 @@ def can_construct_with_memoization(target, word_bank, memo = {}):
     memo[target] = False
     return False
 
-print(can_construct_with_recursion("eeeeeeeeeeeeeeeeeeeeeeeeef", ["e", "eeeee", "eeeeee","eeeeeeee","eeeeeeeeee"]))
-print(can_construct_with_memoization("eeeeeeeeeeeeeeeeeeef", ["e", "ee", "eee","eeee","eeeee"]))
+def can_construct_with_tabulation(target, word_bank):
+    table = [False] * (len(target) + 1)
+    table[0] = True
+
+    for i in range(len(target) + 1):
+        if table[i]:
+            for word in word_bank:
+                if i + len(word) <= len(target) and target[i:i+len(word)] == word:
+                    table[i + len(word)] = True
+    return table[len(target)]

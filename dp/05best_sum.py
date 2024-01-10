@@ -26,3 +26,16 @@ def best_sum_with_memoization(target_sum, numbers, memo = {}):
 
    memo[target_sum] = shortest_combination
    return shortest_combination
+
+def best_sum_with_tabulatin(target_sum, numbers):
+    result_array= [None] * (target_sum + 1)
+    result_array[0] = []
+
+    for i in range(target_sum + 1):
+        if result_array[i] is not None:
+            for num in numbers:
+                if i + num <= target_sum:
+                    new_combination = result_array[i] + [num]
+                    if result_array[i + num] is None or len(new_combination) < len(result_array[i] + [num]):
+                        result_array[i + num] = new_combination
+    return result_array[target_sum]

@@ -23,3 +23,14 @@ def how_sum_with_memoization(target_sum, numbers, memo={}):
             return result
     memo[target_sum] = None
     return None
+
+def how_sum_with_tabulation(target_sum, numbers):
+    result_array= [None] * (target_sum + 1)
+    result_array[0] = []
+
+    for i in range(target_sum + 1):
+        if result_array[i] != None:
+            for num in numbers:
+                if i + num <= target_sum:
+                    result_array[i + num] = result_array[i] + [num]
+    return result_array[target_sum]
